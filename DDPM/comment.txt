@@ -1,0 +1,9 @@
+DDPM 논문: https://arxiv.org/pdf/2006.11239
+
+DDPM 구현 코드 참고: https://github.com/explainingai-code/DDPM-Pytorch/blob/main/tools/sample_ddpm.py
+
+정리:
+각 timestep과 noise가 추가된 영상이 들어왔을 때 노이즈를 Unet 모델을 통해 예측하는 방식
+timestep에 대한 정보를 Transformer에서 positional embedding의 영감을 받아 time embedding을 추가한 후 multi-head layer를 추가하여 Unet 구성
+각 학습에 사용하는 이미지는 random timestep을 정하고 noise image를 만든 후 그에 맞는 time scaling을 한 후 더함.
+Markov chain의 형태를 가져와 전체 과정을 각 markovchain의 곱으로 표현할 수 있고 이는 하나의 Gaussian으로 정리되어, 0~t의 diffusion과정을 각각 거치는 것이 아닌 한번에 noisy image를 만들 수 있어 학습 시간을 크게 줄임
